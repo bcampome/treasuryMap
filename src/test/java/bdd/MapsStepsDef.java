@@ -37,7 +37,8 @@ public class MapsStepsDef {
     }
 
     @And("the description contain T {int}-{int} {int}")
-    public void theDescriptionContainTreasuryCreation(int numberOfTreasury, int column, int line) {
+    public void theDescriptionContainTreasuryCreation( int column, int line, int numberOfTreasury) {
+        System.out.println("column : " + column + " , line : " + line + ", number : " + numberOfTreasury);
         map.addTreasury(numberOfTreasury, column, line);
     }
 
@@ -47,7 +48,7 @@ public class MapsStepsDef {
         if (item instanceof Treasury treasury) {
             assertEquals(numberOfTreasury, treasury.getSize());
         } else {
-            throw new IllegalArgumentException();
+            throw new AssertionError();
         }
     }
 
