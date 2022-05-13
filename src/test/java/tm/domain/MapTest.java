@@ -2,6 +2,8 @@ package tm.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MapTest {
@@ -20,7 +22,7 @@ class MapTest {
         // When
         map.addMountain(1, 1);
         // Then
-        final MapItem item = map.getItem(1, 1);
+        final ItemMap item = map.getItem(1, 1);
         assertInstanceOf(Mountain.class, item);
     }
 
@@ -31,11 +33,25 @@ class MapTest {
         // When
         map.addTreasury(5,1, 1);
         // Then
-        final MapItem item = map.getItem(1, 1);
+        final ItemMap item = map.getItem(1, 1);
         if(item instanceof Treasury treasury){
             assertEquals(5, treasury.getSize());
         }else {
             throw new AssertionError();
         }
+    }
+
+    @Test
+    public void should_retrieveItemAndDrainCase_when_extractItemFromMap(){
+        // Given
+        final Map map = new Map(2, 2);
+        map.addTreasury(20,1, 1);
+        // When
+        Optional<ItemMap> retrieve = map.retrieve(1, 1);
+        // Then
+        assertNull(map.getItem(1,1));
+        assertTrue(retrieve.isPresent());
+        assertEquals(new Treasury(20), retrieve.get());
+
     }
 }

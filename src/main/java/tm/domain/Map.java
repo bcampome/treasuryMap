@@ -1,11 +1,13 @@
 package tm.domain;
 
+import java.util.Optional;
+
 public class Map {
 
-    private final MapItem[][] mapItem;
+    private final ItemMap[][] itemMap;
 
     public Map(int columnSize, int lineSize) {
-        mapItem = new MapItem[columnSize][lineSize];
+        itemMap = new ItemMap[columnSize][lineSize];
     }
 
     public int getNumberOfTreasuryAvailable() {
@@ -16,17 +18,26 @@ public class Map {
         return 0;
     }
 
-    public void addTreasury(int numberOfTreasury, int column, int line) {
-        mapItem[column -1][line-1] = new Treasury(numberOfTreasury);
+    public void addTreasury(int size, int column, int line) {
+        itemMap[column -1][line-1] = new Treasury(size);
     }
 
     public void addMountain(int column, int line) {
-        mapItem[column - 1][line - 1] = new Mountain();
+        itemMap[column - 1][line - 1] = new Mountain();
     }
 
-    public MapItem getItem(int column, int line) {
+    public ItemMap getItem(int column, int line) {
         // Fix me, check IndexOutOfBoundException ??
-        return mapItem[column - 1][line - 1];
+        return itemMap[column - 1][line - 1];
     }
 
+    public Optional<ItemMap> retrieve(int column, int line) {
+        ItemMap item = getItem(column, line);
+        this.erase(column,line);
+        return Optional.ofNullable(item);
+    }
+
+    private void erase(int column, int line) {
+        this.itemMap[column-1][line-1] = null;
+    }
 }
