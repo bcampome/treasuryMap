@@ -22,8 +22,9 @@ class MapTest {
         // When
         map.addMountain(1, 1);
         // Then
-        final ItemMap item = map.getItem(1, 1);
-        assertInstanceOf(Mountain.class, item);
+        final Optional<ItemMap> item = map.getItem(1, 1);
+        assertTrue(item.isPresent());
+        assertInstanceOf(Mountain.class, item.get());
     }
 
     @Test
@@ -31,25 +32,26 @@ class MapTest {
         // Given
         final Map map = new Map(2, 2);
         // When
-        map.addTreasury(5,1, 1);
+        map.addTreasury(5, 1, 1);
         // Then
-        final ItemMap item = map.getItem(1, 1);
-        if(item instanceof Treasury treasury){
+        final Optional<ItemMap> item = map.getItem(1, 1);
+        assertTrue(item.isPresent());
+        if (item.get() instanceof Treasury treasury) {
             assertEquals(5, treasury.getSize());
-        }else {
+        } else {
             throw new AssertionError();
         }
     }
 
     @Test
-    public void should_retrieveItemAndDrainCase_when_extractItemFromMap(){
+    public void should_retrieveItemAndDrainCase_when_extractItemFromMap() {
         // Given
         final Map map = new Map(2, 2);
-        map.addTreasury(20,1, 1);
+        map.addTreasury(20, 1, 1);
         // When
         Optional<ItemMap> retrieve = map.retrieve(1, 1);
         // Then
-        assertNull(map.getItem(1,1));
+        assertTrue(map.getItem(1, 1).isEmpty());
         assertTrue(retrieve.isPresent());
         assertEquals(new Treasury(20), retrieve.get());
 

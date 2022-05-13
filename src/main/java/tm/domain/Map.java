@@ -18,23 +18,22 @@ public class Map {
         return 0;
     }
 
-    public void addTreasury(int size, int column, int line) {
-        itemMap[column -1][line-1] = new Treasury(size);
+    public void addTreasury(int treasurySize, int column, int line) {
+        itemMap[column -1][line-1] = new Treasury(treasurySize);
     }
 
     public void addMountain(int column, int line) {
         itemMap[column - 1][line - 1] = new Mountain();
     }
 
-    public ItemMap getItem(int column, int line) {
-        // Fix me, check IndexOutOfBoundException ??
-        return itemMap[column - 1][line - 1];
+    public Optional<ItemMap> getItem(int column, int line) {
+        return Optional.ofNullable(itemMap[column - 1][line - 1]);
     }
 
     public Optional<ItemMap> retrieve(int column, int line) {
-        ItemMap item = getItem(column, line);
+        Optional<ItemMap> item = getItem(column, line);
         this.erase(column,line);
-        return Optional.ofNullable(item);
+        return item;
     }
 
     private void erase(int column, int line) {
