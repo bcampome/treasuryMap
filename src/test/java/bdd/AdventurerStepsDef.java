@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import tm.domain.Instruction;
 import tm.domain.Adventurer;
+import tm.domain.Position;
 
 import java.util.Optional;
 
@@ -63,6 +64,17 @@ public class AdventurerStepsDef {
         assertEquals(direction, this.adventurer.getDirection().value());
     }
 
+    @And("the adventurer was in position \\(column : {int} line : {int})")
+    public void theAdventurerWasInPositionColumnLine(int column, int line) {
+        this.adventurer.setCurrentPosition(new Position(column,line));
+    }
+
+    @Then("the adventurer should have desired position as \\(column : {int}, line : {int})")
+    public void theAdventurerShouldHaveDesiredPositionAsColumnColumnLineLine(int column, int line) {
+        Optional<Position> desired = this.adventurer.getDesiredPosition();
+        assertTrue(desired.isPresent());
+        assertEquals(new Position(column,line), desired.get());
+    }
 }
 
 

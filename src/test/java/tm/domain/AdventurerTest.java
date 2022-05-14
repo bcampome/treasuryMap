@@ -51,4 +51,6 @@ class AdventurerTest {
         assertEquals(Direction.West, adventurer.getDirection());
     }
 
+
+
 }

@@ -6,6 +6,7 @@ public class Adventurer {
     private final String name;
     private final Queue<Instruction> instructions = new LinkedList<>();
     private Direction direction;
+    private Position position;
 
     public Adventurer(String name, String direction) {
         this.name = name;
@@ -39,5 +40,13 @@ public class Adventurer {
 
     public Direction getDirection() {
         return direction;
+    }
+
+    public void setCurrentPosition(Position position) {
+        this.position = position;
+    }
+
+    public Optional<Position> getDesiredPosition() {
+     return null;// todo to complete
     }
 }
