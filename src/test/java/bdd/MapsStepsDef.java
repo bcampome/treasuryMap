@@ -41,7 +41,6 @@ public class MapsStepsDef {
 
     @And("the description contains T {int}-{int} {int}")
     public void theDescriptionContainTreasuryCreation(int column, int line, int numberOfTreasury) {
-        System.out.println("column : " + column + " , line : " + line + ", number : " + numberOfTreasury);
         map.addTreasury(numberOfTreasury, column, line);
     }
 
