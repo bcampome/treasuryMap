@@ -36,7 +36,7 @@ public enum Direction {
                 return direction;
             }
         }
-        return null;
+        throw new AssertionError(   "No direction for order : " + value);
     }
 
     public static Direction getDirectionByValue(String value) {
@@ -45,7 +45,7 @@ public enum Direction {
                 return direction;
             }
         }
-        return null;
+        throw new IllegalArgumentException("No direction for value : " + value);
     }
 
 

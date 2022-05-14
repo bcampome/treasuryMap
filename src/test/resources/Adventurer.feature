@@ -27,6 +27,15 @@ Feature: Adventurer logic
       | O         | G           | S            |
 
 
+  Scenario Outline: adventurer doesn't provide next position when he have to rotate
+    Given An adventurer "Joe" was created
+    When the adventurer receive as next instruction as "<instruction>"
+    Then The adventurer should not have desired position
+    Examples:
+      | instruction |
+      | D           |
+      | G           |
+
   Scenario Outline: adventurer can give the next desired position when we have to move forward
     Given An adventurer "Joe" was created with direction "<direction>"
     And the adventurer was in position (column : 1 line : 1)
@@ -34,13 +43,20 @@ Feature: Adventurer logic
     Then the adventurer should have desired position as (column : <column>, line : <line>)
     Examples:
       | direction | column | line |
-      | E         | 2      | 1    |
-      | W         | 0      | 1    |
-      | N         | 0      | 1    |
-      | S         | 2      | 1    |
+      | N         | 1      | 0    |
+      | E         | 2      | 1   |
+      | S         | 1      | 2    |
+      | O         | 0      | 1    |
 
+  Scenario: An adventurer must handle a treasury he finds.
+  Given An adventurer "Joe" was created
+    When the adventurer finds a treasury of 2
+    Then the adventurer should provide 2 as sum of treasures he found
 
+  Scenario: An adventurer must handle a new treasury he finds in addition of other founds before
+    Given An adventurer "Joe" was created
+    And the adventurer found a treasury of 5
+    When the adventurer finds a treasury of 3
+    Then the adventurer should provide 8 as sum of treasures he found
 
-    # A next state (PAUSE, ROTATION, MOVE, ACTION ?)
-    # a Position (X,Y)
     # All Treasurers save

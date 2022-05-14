@@ -66,14 +66,36 @@ public class AdventurerStepsDef {
 
     @And("the adventurer was in position \\(column : {int} line : {int})")
     public void theAdventurerWasInPositionColumnLine(int column, int line) {
-        this.adventurer.setCurrentPosition(new Position(column,line));
+        this.adventurer.setCurrentPosition(new Position(column, line));
     }
 
     @Then("the adventurer should have desired position as \\(column : {int}, line : {int})")
     public void theAdventurerShouldHaveDesiredPositionAsColumnColumnLineLine(int column, int line) {
         Optional<Position> desired = this.adventurer.getDesiredPosition();
         assertTrue(desired.isPresent());
-        assertEquals(new Position(column,line), desired.get());
+        assertEquals(new Position(column, line), desired.get());
+    }
+
+    @Then("The adventurer should not have desired position")
+    public void theAdventurerShouldNotHaveDesiredPosition() {
+        Optional<Position> desiredPosition = this.adventurer.getDesiredPosition();
+        assertTrue(desiredPosition.isEmpty());
+    }
+
+    @When("the adventurer finds a treasury of {int}")
+    public void theAdventurerFindsATreasuryOf(int treasury) {
+        adventurer.handleTreasury(treasury);
+    }
+
+
+    @And("the adventurer found a treasury of {int}")
+    public void theAdventurerFoundATreasuryOf(int treasury) {
+        adventurer.handleTreasury(treasury);
+    }
+
+    @Then("the adventurer should provide {int} as sum of treasures he found")
+    public void theAdventurerShouldProvideAsSumOfTreasuresHeFound(int amount) {
+        assertEquals(amount, adventurer.getSumOfTreasury());
     }
 }
 

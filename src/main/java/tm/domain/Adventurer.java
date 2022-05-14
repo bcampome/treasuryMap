@@ -7,6 +7,7 @@ public class Adventurer {
     private final Queue<Instruction> instructions = new LinkedList<>();
     private Direction direction;
     private Position position;
+    private int treasuresSum = 0;
 
     public Adventurer(String name, String direction) {
         this.name = name;
@@ -47,6 +48,36 @@ public class Adventurer {
     }
 
     public Optional<Position> getDesiredPosition() {
-     return null;// todo to complete
+        System.out.println("Current Position : " + position);
+        Optional<Instruction> instruction = Optional.ofNullable(instructions.peek());
+        if(instruction.isPresent() && instruction.get().equals(Instruction.MOVE_FORWARD) ){
+            switch (direction){
+                case North -> {
+                    return Optional.of(position.top());
+                }
+                case South -> {
+                    return Optional.ofNullable(position.down());
+                }
+                case East -> {
+                    return Optional.ofNullable(position.right());
+                }
+                case West -> {
+                    System.out.println("Neext Position : " + position.left());
+
+                    return Optional.ofNullable(position.left());
+                }
+                default -> throw new AssertionError();
+            }
+        }
+     return Optional.empty();
+    }
+
+    public void handleTreasury(int treasury) {
+        this.treasuresSum = treasuresSum + treasury;
+    }
+
+    public int getSumOfTreasury() {
+        return this.treasuresSum;
+
     }
 }

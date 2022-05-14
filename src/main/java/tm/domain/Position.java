@@ -24,11 +24,24 @@ public class Position {
         return Objects.hash(column, line);
     }
 
-    public int getColumn() {
-        return column;
+    @Override
+    public String toString() {
+        return "Position{" +
+                "column=" + column +
+                ", line=" + line +
+                '}';
     }
 
-    public int getLine() {
-        return line;
+    public Position top(){
+        return new Position(this.column, this.line-1);
+    }
+    public Position down(){
+        return new Position(this.column, this.line+1);
+    }
+    public Position left(){
+        return new Position(this.column-1, this.line);
+    }
+    public Position right(){
+        return new Position(this.column+1, this.line);
     }
 }

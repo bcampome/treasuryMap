@@ -51,6 +51,82 @@ class AdventurerTest {
         assertEquals(Direction.West, adventurer.getDirection());
     }
 
+    @Test
+    void should_returnNoPosition_when_nextInstructionIsARotateInstruction(){
+        Adventurer adventurer = new Adventurer("Joe", "N");
+        adventurer.addInstructions(Instruction.ROTATE_RIGHT.getValue());
+        Optional<Position> desiredPosition = adventurer.getDesiredPosition();
+        assertTrue(desiredPosition.isEmpty());
+    }
+
+    @Test
+    void should_returnOverheadPosition_when_nextInstructionIsMoveForwardAndDirectionEqualNorth(){
+        Adventurer adventurer = new Adventurer("Joe", "N");
+        adventurer.addInstructions(Instruction.MOVE_FORWARD.getValue());
+        adventurer.setCurrentPosition(new Position(1,1));
+
+        Optional<Position> desiredPosition = adventurer.getDesiredPosition();
+
+        assertTrue(desiredPosition.isPresent());
+        assertEquals(new Position(1,0),desiredPosition.get());
+    }
+
+    @Test
+    void should_returnOverheadPosition_when_nextInstructionIsMoveForwardAndDirectionEqualEst(){
+        Adventurer adventurer = new Adventurer("Joe", "E");
+        adventurer.addInstructions(Instruction.MOVE_FORWARD.getValue());
+        adventurer.setCurrentPosition(new Position(1,1));
+
+        Optional<Position> desiredPosition = adventurer.getDesiredPosition();
+
+        assertTrue(desiredPosition.isPresent());
+        assertEquals(new Position(2,1),desiredPosition.get());
+    }
+
+    @Test
+    void should_returnOverheadPosition_when_nextInstructionIsMoveForwardAndDirectionEqualSouth(){
+        Adventurer adventurer = new Adventurer("Joe", "S");
+        adventurer.addInstructions(Instruction.MOVE_FORWARD.getValue());
+        adventurer.setCurrentPosition(new Position(1,1));
+
+        Optional<Position> desiredPosition = adventurer.getDesiredPosition();
+
+        assertTrue(desiredPosition.isPresent());
+        assertEquals(new Position(1,2),desiredPosition.get());
+    }
+
+    @Test
+    void should_returnOverheadPosition_when_nextInstructionIsMoveForwardAndDirectionEqualWest(){
+        Adventurer adventurer = new Adventurer("Joe", "O");
+        adventurer.addInstructions(Instruction.MOVE_FORWARD.getValue());
+        adventurer.setCurrentPosition(new Position(1,1));
+
+        Optional<Position> desiredPosition = adventurer.getDesiredPosition();
+
+        assertTrue(desiredPosition.isPresent());
+        assertEquals(new Position(0,1),desiredPosition.get());
+    }
+
+    @Test
+    void should_saveAmountOfTreasury_when_handleATreasury(){
+        Adventurer adventurer = new Adventurer("Joe", "N");
+
+        adventurer.handleTreasury(5);
+
+        assertEquals(5, adventurer.getSumOfTreasury());
+    }
+
+    @Test
+    void should_saveAmountOfAllTreasures_when_handleSeveralTreasures(){
+        Adventurer adventurer = new Adventurer("Joe", "N");
+
+        adventurer.handleTreasury(5);
+        adventurer.handleTreasury(3);
+
+        assertEquals(8, adventurer.getSumOfTreasury());
+    }
+
+
 
 
 }
