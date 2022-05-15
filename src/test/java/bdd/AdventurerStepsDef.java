@@ -5,6 +5,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import tm.domain.Direction;
 import tm.domain.Instruction;
 import tm.domain.Adventurer;
 import tm.domain.Position;
@@ -21,7 +22,7 @@ public class AdventurerStepsDef {
 
     @Given("An adventurer {string} was created")
     public void anAdventurerWasCreated(String name) {
-        this.adventurer = new Adventurer(name, "E");
+        this.adventurer = new Adventurer(name, Direction.East);
 
     }
 
@@ -46,7 +47,7 @@ public class AdventurerStepsDef {
 
     @Given("An adventurer {string} was created with direction {string}")
     public void anAdventurerJohnWasCreatedWithDirectionDirection(String name, String direction) {
-        this.adventurer = new Adventurer(name, direction);
+        this.adventurer = new Adventurer(name, Direction.getDirectionByValue(direction));
     }
 
     @And("the adventurer received next instruction as {string}")
@@ -96,6 +97,16 @@ public class AdventurerStepsDef {
     @Then("the adventurer should provide {int} as sum of treasures he found")
     public void theAdventurerShouldProvideAsSumOfTreasuresHeFound(int amount) {
         assertEquals(amount, adventurer.getSumOfTreasury());
+    }
+
+    @When("the adventurer is in position \\(column : {int} line : {int})")
+    public void theAdventurerIsInPositionColumnLine(int column, int line) {
+        adventurer.setCurrentPosition(new Position(column,line));
+    }
+
+    @Then("the adventurer should provide current position as \\(column : {int}, line : {int})")
+    public void theAdventurerShouldProvideCurrentPositionAsColumnLine(int column, int line) {
+        assertEquals(new Position(1,1),adventurer.getCurrentPosition());
     }
 }
 

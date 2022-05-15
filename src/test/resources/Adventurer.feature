@@ -36,6 +36,11 @@ Feature: Adventurer logic
       | D           |
       | G           |
 
+    Scenario: adventurer can give current position
+      Given An adventurer "Doe" was created
+      When the adventurer is in position (column : 1 line : 1)
+      Then the adventurer should provide current position as (column : 1, line : 1)
+
   Scenario Outline: adventurer can give the next desired position when we have to move forward
     Given An adventurer "Joe" was created with direction "<direction>"
     And the adventurer was in position (column : 1 line : 1)

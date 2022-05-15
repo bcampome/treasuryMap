@@ -9,11 +9,9 @@ public class Adventurer {
     private Position position;
     private int treasuresSum = 0;
 
-    public Adventurer(String name, String direction) {
+    public Adventurer(String name, Direction direction) {
         this.name = name;
-        this.direction = Optional
-                .ofNullable(Direction.getDirectionByValue(direction))
-                .orElse(Direction.East);
+        this.direction = direction;
     }
 
 
@@ -47,8 +45,11 @@ public class Adventurer {
         this.position = position;
     }
 
+    public Position getCurrentPosition(){
+        return this.position;
+    }
+
     public Optional<Position> getDesiredPosition() {
-        System.out.println("Current Position : " + position);
         Optional<Instruction> instruction = Optional.ofNullable(instructions.peek());
         if(instruction.isPresent() && instruction.get().equals(Instruction.MOVE_FORWARD) ){
             switch (direction){
@@ -62,8 +63,6 @@ public class Adventurer {
                     return Optional.ofNullable(position.right());
                 }
                 case West -> {
-                    System.out.println("Neext Position : " + position.left());
-
                     return Optional.ofNullable(position.left());
                 }
                 default -> throw new AssertionError();
@@ -79,5 +78,10 @@ public class Adventurer {
     public int getSumOfTreasury() {
         return this.treasuresSum;
 
+    }
+
+
+    public String getName() {
+        return name;
     }
 }

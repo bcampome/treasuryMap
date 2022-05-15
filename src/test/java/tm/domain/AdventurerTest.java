@@ -14,7 +14,7 @@ class AdventurerTest {
     @Test
     public void should_applyRotateRightInstruction_when_received_D_asInputInstruction() {
         // Given
-        Adventurer adventurer = new Adventurer("Joe", "E");
+        Adventurer adventurer = new Adventurer("Joe", Direction.East);
         adventurer.addInstructions("D");
         Optional<Instruction> instruction = adventurer.applyNextInstruction();
         assertTrue(instruction.isPresent());
@@ -23,7 +23,7 @@ class AdventurerTest {
 
     @Test
     void should_applySuccessiveInstructions_when_receivedComplexCommand() {
-        Adventurer adventurer = new Adventurer("Joe", "E");
+        Adventurer adventurer = new Adventurer("Joe",  Direction.East);
         adventurer.addInstructions("DGA");
 
         Queue<Instruction> instructions = adventurer.nextInstructions();
@@ -35,7 +35,7 @@ class AdventurerTest {
 
     @Test
     void should_haveDirectionToEast_when_existWithNorthDirectionAndGetInstructionRotationRight() {
-        Adventurer adventurer = new Adventurer("Joe", "N");
+        Adventurer adventurer = new Adventurer("Joe",  Direction.East);
         adventurer.addInstructions(Instruction.ROTATE_RIGHT.getValue());
 
         adventurer.applyNextInstruction();
@@ -44,7 +44,7 @@ class AdventurerTest {
 
     @Test
     void should_haveDirectionToWest_when_existWithNorthDirectionAndGetInstructionRotationLeft() {
-        Adventurer adventurer = new Adventurer("Joe", "N");
+        Adventurer adventurer = new Adventurer("Joe",  Direction.East);
         adventurer.addInstructions(Instruction.ROTATE_LEFT.getValue());
 
         adventurer.applyNextInstruction();
@@ -53,7 +53,7 @@ class AdventurerTest {
 
     @Test
     void should_returnNoPosition_when_nextInstructionIsARotateInstruction(){
-        Adventurer adventurer = new Adventurer("Joe", "N");
+        Adventurer adventurer = new Adventurer("Joe",  Direction.East);
         adventurer.addInstructions(Instruction.ROTATE_RIGHT.getValue());
         Optional<Position> desiredPosition = adventurer.getDesiredPosition();
         assertTrue(desiredPosition.isEmpty());
@@ -61,7 +61,7 @@ class AdventurerTest {
 
     @Test
     void should_returnOverheadPosition_when_nextInstructionIsMoveForwardAndDirectionEqualNorth(){
-        Adventurer adventurer = new Adventurer("Joe", "N");
+        Adventurer adventurer = new Adventurer("Joe",  Direction.East);
         adventurer.addInstructions(Instruction.MOVE_FORWARD.getValue());
         adventurer.setCurrentPosition(new Position(1,1));
 
@@ -73,7 +73,7 @@ class AdventurerTest {
 
     @Test
     void should_returnOverheadPosition_when_nextInstructionIsMoveForwardAndDirectionEqualEst(){
-        Adventurer adventurer = new Adventurer("Joe", "E");
+        Adventurer adventurer = new Adventurer("Joe",  Direction.East);
         adventurer.addInstructions(Instruction.MOVE_FORWARD.getValue());
         adventurer.setCurrentPosition(new Position(1,1));
 
@@ -85,7 +85,7 @@ class AdventurerTest {
 
     @Test
     void should_returnOverheadPosition_when_nextInstructionIsMoveForwardAndDirectionEqualSouth(){
-        Adventurer adventurer = new Adventurer("Joe", "S");
+        Adventurer adventurer = new Adventurer("Joe",  Direction.South);
         adventurer.addInstructions(Instruction.MOVE_FORWARD.getValue());
         adventurer.setCurrentPosition(new Position(1,1));
 
@@ -97,7 +97,7 @@ class AdventurerTest {
 
     @Test
     void should_returnOverheadPosition_when_nextInstructionIsMoveForwardAndDirectionEqualWest(){
-        Adventurer adventurer = new Adventurer("Joe", "O");
+        Adventurer adventurer = new Adventurer("Joe", Direction.West);
         adventurer.addInstructions(Instruction.MOVE_FORWARD.getValue());
         adventurer.setCurrentPosition(new Position(1,1));
 
@@ -109,7 +109,7 @@ class AdventurerTest {
 
     @Test
     void should_saveAmountOfTreasury_when_handleATreasury(){
-        Adventurer adventurer = new Adventurer("Joe", "N");
+        Adventurer adventurer = new Adventurer("Joe",  Direction.North);
 
         adventurer.handleTreasury(5);
 
@@ -118,7 +118,7 @@ class AdventurerTest {
 
     @Test
     void should_saveAmountOfAllTreasures_when_handleSeveralTreasures(){
-        Adventurer adventurer = new Adventurer("Joe", "N");
+        Adventurer adventurer = new Adventurer("Joe", Direction.North);
 
         adventurer.handleTreasury(5);
         adventurer.handleTreasury(3);
