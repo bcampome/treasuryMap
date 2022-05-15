@@ -3,12 +3,20 @@ package tm.domain;
 import java.util.Objects;
 
 public class Position {
-    public final int column;
-    public final int line;
+    private final int column;
+    private final int line;
 
     public Position(int column, int line) {
         this.column = column;
         this.line = line;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public int getLine() {
+        return line;
     }
 
     @Override

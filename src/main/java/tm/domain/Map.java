@@ -74,4 +74,9 @@ public class Map {
                 ", columnSize=" + columnSize +
                 "}\n" + sb;
     }
+
+    public boolean mayContain(Position position) {
+        return (position.getColumn() < columnSize +1 && position.getColumn() >0)
+        && (position.getLine() < lineSize +1 && position.getLine() >0);
+    }
 }
