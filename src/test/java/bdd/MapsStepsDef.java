@@ -89,4 +89,15 @@ public class MapsStepsDef {
             throw new AssertionError();
         }
     }
+
+    @And("the map should have {int} columns")
+    public void theMapShouldHaveColumns(int column) {
+        assertEquals(column,map.getNumberOfColumn());
+    }
+
+    @And("the map should have {int} lines")
+    public void theMapShouldHaveLines(int line) {
+        assertEquals(line,map.getNumberOfLine());
+
+    }
 }

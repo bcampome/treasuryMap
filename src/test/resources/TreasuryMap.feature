@@ -5,6 +5,8 @@ Feature: Map Creation
     When the description start with C 6 5
     Then the map should have no treasury
     And the map should have no mountain
+    And the map should have 6 columns
+    And the map should have 5 lines
 
   Scenario: Creating a map with a single treasury
     Given Received a creation map file
