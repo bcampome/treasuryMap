@@ -18,7 +18,7 @@ Feature: Engine logic
       | S         | 2      | 3    |
       | O         | 1      | 2    |
 
-  Scenario Outline: an Adventurer is blocked by a mountain
+  Scenario Outline: an Adventurer ignore move forward instruction when he is blocked by a mountain
     Given a map was created with "<map>"
     And an adventurer was created with "John 2-2 <direction> A "
     When the engine run all instruction of adventurer(s)

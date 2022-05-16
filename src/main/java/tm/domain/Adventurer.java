@@ -80,8 +80,12 @@ public class Adventurer {
 
     }
 
-
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + getCurrentPosition().getColumn() + "-" + getCurrentPosition().getLine() + " " + treasuresSum;
     }
 }

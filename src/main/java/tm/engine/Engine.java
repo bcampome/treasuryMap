@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class Engine {
-    private Map map;
-    private List<Adventurer> adventurers;
+    private final Map map;
+    private final List<Adventurer> adventurers;
 
     public Engine(Map map, List<Adventurer> adventurers) {
         this.map = map;

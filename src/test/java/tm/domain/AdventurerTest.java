@@ -39,7 +39,7 @@ class AdventurerTest {
         adventurer.addInstructions(Instruction.ROTATE_RIGHT.getValue());
 
         adventurer.applyNextInstruction();
-        assertEquals(Direction.East, adventurer.getDirection());
+        assertEquals(Direction.South, adventurer.getDirection());
     }
 
     @Test
@@ -48,7 +48,7 @@ class AdventurerTest {
         adventurer.addInstructions(Instruction.ROTATE_LEFT.getValue());
 
         adventurer.applyNextInstruction();
-        assertEquals(Direction.West, adventurer.getDirection());
+        assertEquals(Direction.North, adventurer.getDirection());
     }
 
     @Test
@@ -61,7 +61,7 @@ class AdventurerTest {
 
     @Test
     void should_returnOverheadPosition_when_nextInstructionIsMoveForwardAndDirectionEqualNorth(){
-        Adventurer adventurer = new Adventurer("Joe",  Direction.East);
+        Adventurer adventurer = new Adventurer("Joe",  Direction.North);
         adventurer.addInstructions(Instruction.MOVE_FORWARD.getValue());
         adventurer.setCurrentPosition(new Position(1,1));
 
