@@ -11,6 +11,7 @@ import tm.domain.Map;
 import tm.domain.Position;
 import tm.engine.Engine;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class EngineStepsDef {
 
     private Map map;
     private Engine engine;
-    private List<Adventurer> adventurers;
+    private List<Adventurer> adventurers = new ArrayList<>();
 
     @Given("a map was created with {string}")
     public void aMapWasCreatedWith(String input) {
@@ -30,7 +31,7 @@ public class EngineStepsDef {
 
     @And("an adventurer was created with {string}")
     public void anAdventurerWasCreatedWith(String input) {
-        adventurers = AdventurerBuilder.build(input);
+        adventurers.addAll(AdventurerBuilder.build(input));
     }
 
     @When("the engine run all instruction of adventurer\\(s)")
