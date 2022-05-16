@@ -15,8 +15,7 @@ public class Engine {
     }
 
     public void run() {
-
-        while (anAdventurerHasNextInstruction()) {
+        while (anAdventurerHasNextInstruction() || anAdventurerIsOnTreasuryCase()) {
             adventurers.forEach(this::applyCurrentInstruction);
         }
     }
@@ -57,6 +56,15 @@ public class Engine {
         return this.adventurers.stream().anyMatch(adventurer -> !adventurer.nextInstructions().isEmpty());
     }
 
+    private boolean anAdventurerIsOnTreasuryCase(){
+        return
+                this.adventurers.stream()
+                        .map(Adventurer::getCurrentPosition)
+                        .anyMatch(position -> {
+                            Optional<ItemMap> item = map.getItem(position.getColumn(), position.getLine());
+                            return item.isPresent() && item.get() instanceof Treasury;
+                        });
+    }
     public List<Adventurer> getAdventurers() {
         return adventurers;
     }

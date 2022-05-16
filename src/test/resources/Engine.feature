@@ -39,3 +39,12 @@ Feature: Engine logic
       | map                     | totalTreasury |
       | C 6-5\nT 4-3 3          | 3             |
       | C 6-5\nT 3-2 1\nT 5-4 3 | 4             |
+
+  Scenario Outline: an adventure wich finish on treasury case handle the treasury
+    Given a map was created with "<map>"
+    And an adventurer was created with "Jack 1-1 E AA"
+    When the engine run all instruction of adventurer(s)
+    Then the adventurer "Jack" should have treasurer sum equal to 3
+    Examples:
+      | map            |
+      | C 3-1\nT 3-1 3 |
